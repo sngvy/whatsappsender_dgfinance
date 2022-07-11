@@ -68,16 +68,17 @@ for idx, number in enumerate(numbers):
 			if not sent:
 				driver.get(url)
 				try:
-					msgbox = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH, '//div[@class="_13NKt copyable-text selectable-text"][@data-tab="10"]')))
+					msgbox = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH, '//div[@class="_2lMWa"]//div[@role="textbox"]')))
 				except Exception as e:
 					print(f'Номер {number} не найден в WhatsApp')
 				else:
 					sleep(10)
 					msgbox.click()
-					msgbox.send_keys(Keys.ENTER)
-					sleep(10)
+					sendbtn = driver.find_element(By.XPATH, '//div[@class="_3HQNh _1Ae7k"]')
+					sendbtn.click()
 					sent=True
-					sleep(10)
 					print(f'Сообщение на номер {number} отправлено')
+					sleep(10)
+
 	except Exception as e:
 		print(f'Не удалось отправить сообщение на номер {number}')
